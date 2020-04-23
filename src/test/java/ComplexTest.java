@@ -56,7 +56,7 @@ public class ComplexTest {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class.getName());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Collections.singletonList("alert"));
+        consumer.subscribe(Collections.singletonList("alerts"));
     }
 
     @BeforeEach
@@ -150,7 +150,7 @@ public class ComplexTest {
         Properties props = new Properties();
         props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, Constants.KAFKA_SERVER);
         AdminClient client = KafkaAdminClient.create(props);
-        client.deleteTopics(Collections.singletonList("alert"));
+        client.deleteTopics(Collections.singletonList("alerts"));
         client.close();
     }
 

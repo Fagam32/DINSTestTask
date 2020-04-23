@@ -28,7 +28,7 @@ public class MessageSenderTest {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.LongDeserializer");
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Collections.singletonList("alert"));
+        consumer.subscribe(Collections.singletonList("alerts"));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class MessageSenderTest {
         Properties props = new Properties();
         props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, Constants.KAFKA_SERVER);
         AdminClient client = KafkaAdminClient.create(props);
-        client.deleteTopics(Collections.singletonList("alert"));
+        client.deleteTopics(Collections.singletonList("alerts"));
         client.close();
     }
 }

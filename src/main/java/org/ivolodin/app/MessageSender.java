@@ -33,7 +33,7 @@ public class MessageSender {
 
         Random random = new Random();
         try {
-            producer.send(new ProducerRecord<>("alert", random.nextLong(), message)).get();
+            producer.send(new ProducerRecord<>("alerts", random.nextLong(), message)).get();
         } catch (InterruptedException | ExecutionException e) {
             logger.error("Troubles with sending", e);
         }
