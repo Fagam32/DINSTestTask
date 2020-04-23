@@ -38,8 +38,8 @@
  
  
  Опции:
- + `from=ip:host` ИЛИ `from=ip`
- + `to=ip:host` ИЛИ `to=ip:host`
+ + `from=ip:socket` ИЛИ `from=ip`
+ + `to=ip:socket` ИЛИ `to=ip`
  + Можно использовать обе сразу
  + Если опций нет, то считается весь трафик
  
