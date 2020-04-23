@@ -3,6 +3,9 @@ package org.ivolodin.app;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.pcap4j.core.*;
+import org.pcap4j.util.NifSelector;
+
+import java.io.IOException;
 
 public class TrafficCatcher implements AutoCloseable {
     public static final Logger logger = LogManager.getLogger(TrafficCatcher.class);
@@ -25,7 +28,8 @@ public class TrafficCatcher implements AutoCloseable {
     private void chooseDevice() {
         try {
             //Packets from any device will be caught. Even USB
-            device = Pcaps.findAllDevs().get(1);
+            if (device == null)
+                device = Pcaps.getDevByName("any");
         } catch (PcapNativeException e) {
             logger.error("Problems with devices?", e);
             e.printStackTrace();
@@ -41,11 +45,10 @@ public class TrafficCatcher implements AutoCloseable {
         int timeout = 100;
 
 
-
         try {
             handler = device.openLive(snapshotLength, PcapNetworkInterface.PromiscuousMode.PROMISCUOUS, timeout);
 
-        } catch (PcapNativeException  e) {
+        } catch (PcapNativeException e) {
             logger.error("Troubles with opening live in Pcap4j", e);
             System.exit(1);
         }

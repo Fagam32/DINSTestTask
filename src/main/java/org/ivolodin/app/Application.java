@@ -34,8 +34,8 @@ public class Application {
 
         context = new JavaStreamingContext(conf, Durations.seconds(1));
         JavaReceiverInputDStream<Long> data = context.receiverStream(new TrafficReceiver(StorageLevels.MEMORY_AND_DISK));
-        //Big window is 30 seconds, sliding every 10 seconds
-        JavaDStream<Long> stream = data.reduceByWindow(Long::sum, Durations.seconds(30), Durations.seconds(15));
+        //Big window is 5 minutes, sliding every 15 seconds
+        JavaDStream<Long> stream = data.reduceByWindow(Long::sum, Durations.minutes(5), Durations.seconds(15));
 
         stream.foreachRDD(longJavaRDD -> {
             List<Long> collect = longJavaRDD.collect();

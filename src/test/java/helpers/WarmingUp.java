@@ -45,6 +45,11 @@ public class WarmingUp {
         testServer = new TestServer();
         serverExecutor = Executors.newSingleThreadExecutor();
         serverExecutor.submit(() -> testServer.start());
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void runClient() {
@@ -74,7 +79,7 @@ public class WarmingUp {
         String expected = "Traffic size is less than 1024";
         boolean isRead = false;
         while (!isRead) {
-            ConsumerRecords<Long, String> records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<Long, String> records = consumer.poll(Duration.ofSeconds(1));
             for (ConsumerRecord<Long, String> record : records) {
                 String actual = record.value();
                 assertTrue(actual.startsWith(expected));

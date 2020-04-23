@@ -66,7 +66,7 @@ public class ComplexTest {
     }
 
     @BeforeEach
-    public void runApplication() throws InterruptedException {
+    public void runApplication() {
         String[] args = new String[1];
         args[0] = "to=localhost:4445";
         Application app = Application.getInstance();
@@ -79,7 +79,7 @@ public class ComplexTest {
         String expected = "Traffic size is less than 1024";
         boolean isRead = false;
         while (!isRead) {
-            ConsumerRecords<Long, String> records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<Long, String> records = consumer.poll(Duration.ofSeconds(1));
             for (ConsumerRecord<Long, String> record : records) {
                 String actual = record.value();
                 assertTrue(actual.startsWith(expected));
@@ -103,7 +103,7 @@ public class ComplexTest {
 
         boolean isRead = false;
         while (!isRead) {
-            ConsumerRecords<Long, String> records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<Long, String> records = consumer.poll(Duration.ofSeconds(1));
             for (ConsumerRecord<Long, String> record : records) {
                 String actual = record.value();
                 assertTrue(actual.startsWith(expected), actual);
@@ -124,7 +124,7 @@ public class ComplexTest {
 
         int countOfReadRecords = 0;
         do {
-            ConsumerRecords<Long, String> records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<Long, String> records = consumer.poll(Duration.ofSeconds(1));
             for (ConsumerRecord<Long, String> record : records) {
                 String actual = record.value();
                 boolean contains = (actual.startsWith(expectedLess)) || (actual.startsWith(expectedMore));

@@ -35,7 +35,7 @@ public class MessageSenderTest {
     public void baseTest() {
         boolean isSend = false;
         while (true) {
-            ConsumerRecords<Long, String> records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<Long, String> records = consumer.poll(Duration.ofSeconds(1));
             if (!records.isEmpty()) {
                 String expected = createMessage(true, 1000, 2000);
                 assertEquals(1, records.count());
