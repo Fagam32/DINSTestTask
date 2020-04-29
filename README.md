@@ -18,7 +18,7 @@
  mkdir ~/Task
  cd ~/Task
  git clone https://github.com/Fagam32/DINSTestTask
- cd ~/Task/DINSTestTask
+ cd ~/Task/TrafficSniffer
  ```
  Создаем jar
  
